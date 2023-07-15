@@ -1,49 +1,48 @@
+---
 version: '3'
+
+x-global-environment:
+ &global-environment
+  restart: unless-stopped
+  build:
+    context: ./Configs
+
 services:
   nginx:
+    <<: *global-environment
     build:
-      context: ./Configs
       dockerfile: Dockerfile.nginx
-    restart: unless-stopped
     ports:
-      - "80:80"
-    # volumes:
-    #   - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ${NGINX_PORT}:${NGINX_HOST_PORT}
 
   apache:
+    <<: *global-environment
     build:
-      context: ./Configs
       dockerfile: Dockerfile.apache
-    restart: unless-stopped
     ports:
-      - "8080:80"
-    # volumes:
-    #   -
+      - "${APACHE_PORT}:${APACHE_HOST_PORT}"
     networks:
-      net1:
-        ipv4_address: 10.10.10.10
+      apache_net:
+        ipv4_address: ${APACHE_NET_SUBNET}.${APACHE_IP}
 
   caddy:
+    <<: *global-environment
     build:
-      context: ./Configs
       dockerfile: Dockerfile.caddy
-    restart: unless-stopped
     ports:
-      - "8081:2015"
-    # volumes:
-    #   - ./Caddyfile:/etc/caddy/Caddyfile
+      - "${CADDY_PORT}:${CADDY_HOST_PORT}"
     networks:
-      net2:
-        ipv4_address: 20.20.20.20
+      caddy_net:
+        ipv4_address: ${CADDY_NET_SUBNET}.${CADDY_IP}
 
 networks:
-  net1:
+  apache_net:
     driver: bridge
     ipam:
      config:
-       - subnet: 10.10.10.0/24
-  net2:
+       - subnet: ${APACHE_NET_SUBNET}.0/24
+  caddy_net:
     driver: bridge
     ipam:
      config:
-       - subnet: 20.20.20.0/24
+       - subnet: ${CADDY_NET_SUBNET}.0/24
