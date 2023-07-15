@@ -1,0 +1,2 @@
+FROM caddy:latest
+RUN echo -e ":2015\n\nroot * /usr/share/caddy\nfile_server" > /etc/caddy/Caddyfile
