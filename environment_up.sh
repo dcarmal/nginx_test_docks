@@ -34,4 +34,13 @@ if [ -z "$NGINX_\*" ] || [ -z "$NGINX_PORT" ] || [ -z "$\*_SUBNET" ]; then
     exit 1
 fi
 
-docker-compose --env-file Configs/settings.env up -d
+# Capturing output in log
+docker-compose --env-file Configs/settings.env up -d 2>&1 | awk '{ print strftime("%Y-%m-%d %H:%M:%S"), $0; fflush(); }' | tee docker-compose.log
+
+if [ ${PIPESTATUS[0]} -ne 0 ]; then
+    echo "An error occurred while executing docker-compose. See \"docker-compose.log\" for details." 1>&2
+    exit 1
+else
+  # Si docker-compose se ejecuta con éxito entonces se ejecuta docker inspect
+  docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq -f "name=web_dock_")
+fi

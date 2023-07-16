@@ -10,6 +10,7 @@ x-global-environment:
 services:
   nginx:
     <<: *global-environment
+    container_name: web_dock_nginx
     build:
       dockerfile: Dockerfile.nginx
     ports:
@@ -17,6 +18,7 @@ services:
 
   apache:
     <<: *global-environment
+    container_name: web_dock_apache
     build:
       dockerfile: Dockerfile.apache
     ports:
@@ -27,6 +29,7 @@ services:
 
   caddy:
     <<: *global-environment
+    container_name: web_dock_caddy
     build:
       dockerfile: Dockerfile.caddy
     ports:
