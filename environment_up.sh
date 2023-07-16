@@ -4,6 +4,8 @@
 # Author: David C.
 # Date: 15.07.2023
 # Description: This script sets up a docker environment
+# Parameters:
+#   -clearlogs: tries to find and delete log files specified in "log_files"
 # -
 #
 # Variable section
@@ -52,7 +54,7 @@ fi
 
 # Parameter search
 for arg in "$@"; do
-# Checking for parameter -clearlogs
+# CLEARLOGS
     if [ "${arg}" = "-clearlogs" ]; then
         # Then log files found are cleared
         for file in "${log_files[@]}"; do
