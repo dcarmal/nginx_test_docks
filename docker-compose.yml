@@ -17,8 +17,11 @@ services:
       - "${NGINX_HOST_PORT}:${NGINX_PORT}"
     volumes: 
       - type: bind
-        source: NGINX_files/
+        source: ./NGINX_files/
         target: /etc/nginx/
+      - type: bind
+        source: ./NGINX_files/varlognginx/
+        target: /var/log/nginx
 
   apache:
     <<: *global-environment
