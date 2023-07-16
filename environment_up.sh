@@ -16,7 +16,6 @@ log_files=('./docker-compose.log' './NGINX_files/Logs/access.log' './NGINX_files
 # End of variable section
 #
 #
-#
 # Script start
 #
 # Checking settings file presence, if not found, error exit

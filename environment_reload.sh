@@ -11,7 +11,7 @@
 # Variable section
 #
 # - Log files to clear
-log_files=('./docker-compose.log' './NGINX_files/Logs/access.log' './NGINX_files/Logs/error.log')
+log_files=('./NGINX_files/Logs/access.log' './NGINX_files/Logs/error.log')
 #
 # End of variable section
 #
@@ -28,7 +28,7 @@ for arg in "$@"; do
                 echo "Log file found: ${file}"
                 rm ${file} && echo "Successfully deleted: ${file}" || echo "Failed deleting: ${file}"
             else
-                echo "No encontrado: ${file}"
+                echo "Not found: ${file}"
             fi 
         done
     fi
