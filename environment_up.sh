@@ -29,11 +29,9 @@ fi
 
 source ./Configs/settings.env
 
-if [ -z "$INTERFACE" ] || [ -z "$NGINX_PORT" ] || [ -z "$\*_SUBNET" ]; then
+if [ -z "$NGINX_\*" ] || [ -z "$NGINX_PORT" ] || [ -z "$\*_SUBNET" ]; then
     echo "Required environment variables are missing in the file Configs/settings.env"
     exit 1
 fi
 
-sudo ip addr add $NET1_SUBNET dev $INTERFACE
-sudo ip addr add $NET2_SUBNET dev $INTERFACE
 docker-compose --env-file Configs/settings.env up -d

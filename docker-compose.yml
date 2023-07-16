@@ -13,14 +13,14 @@ services:
     build:
       dockerfile: Dockerfile.nginx
     ports:
-      - ${NGINX_PORT}:${NGINX_HOST_PORT}
+      - "${NGINX_HOST_PORT}:${NGINX_PORT}"
 
   apache:
     <<: *global-environment
     build:
       dockerfile: Dockerfile.apache
     ports:
-      - "${APACHE_PORT}:${APACHE_HOST_PORT}"
+      - "${APACHE_HOST_PORT}:${APACHE_PORT}"
     networks:
       apache_net:
         ipv4_address: ${APACHE_NET_SUBNET}.${APACHE_IP}
@@ -30,7 +30,7 @@ services:
     build:
       dockerfile: Dockerfile.caddy
     ports:
-      - "${CADDY_PORT}:${CADDY_HOST_PORT}"
+      - "${CADDY_HOST_PORT}:${CADDY_PORT}"
     networks:
       caddy_net:
         ipv4_address: ${CADDY_NET_SUBNET}.${CADDY_IP}
