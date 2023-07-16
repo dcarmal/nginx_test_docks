@@ -15,6 +15,10 @@ services:
       dockerfile: Dockerfile.nginx
     ports:
       - "${NGINX_HOST_PORT}:${NGINX_PORT}"
+    volumes: 
+      - type: bind
+        source: NGINX_files/
+        target: /etc/nginx/
 
   apache:
     <<: *global-environment
