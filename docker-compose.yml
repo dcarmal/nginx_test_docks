@@ -5,27 +5,32 @@ x-global-environment:
  &global-environment
   restart: unless-stopped
   build:
-    context: ./Configs
+    context: ./Docker_configs
 
 services:
   nginx:
     <<: *global-environment
     container_name: web_dock_nginx
+    image: nginx:latest
     build:
       dockerfile: Dockerfile.nginx
     ports:
       - "${NGINX_HOST_PORT}:${NGINX_PORT}"
     volumes: 
       - type: bind
-        source: ./NGINX_files/
+        source: ./NGINX_files/Confs/
         target: /etc/nginx/
       - type: bind
-        source: ./NGINX_files/varlognginx/
+        source: ./NGINX_files/Logs/
         target: /var/log/nginx
+    networks:
+      - apache_net
+      - caddy_net
 
   apache:
     <<: *global-environment
     container_name: web_dock_apache
+    image: httpd:latest
     build:
       dockerfile: Dockerfile.apache
     ports:
@@ -37,6 +42,7 @@ services:
   caddy:
     <<: *global-environment
     container_name: web_dock_caddy
+    image: caddy:latest
     build:
       dockerfile: Dockerfile.caddy
     ports:
