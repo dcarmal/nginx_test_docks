@@ -7,6 +7,19 @@ x-global-environment:
   build:
     context: ./Docker_configs
 
+networks:
+  nginx_net:
+  apache_net:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: ${APACHE_NET_SUBNET}.0/24
+  caddy_net:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: ${CADDY_NET_SUBNET}.0/24
+
 services:
   nginx:
     <<: *global-environment
@@ -18,14 +31,17 @@ services:
       - "${NGINX_HOST_PORT}:${NGINX_PORT}"
     volumes: 
       - type: bind
-        source: ./NGINX_files/Confs/
-        target: /etc/nginx/
+        source: ./NGINX_files/Conf/
+        target: /etc/nginx/conf.d
       - type: bind
         source: ./NGINX_files/Logs/
         target: /var/log/nginx
     networks:
-      - apache_net
-      - caddy_net
+      apache_net:
+      caddy_net:
+      nginx_net:
+        aliases:
+          - "${DOMAIN_NAME}"
 
   apache:
     <<: *global-environment
@@ -50,15 +66,6 @@ services:
     networks:
       caddy_net:
         ipv4_address: ${CADDY_NET_SUBNET}.${CADDY_IP}
-
-networks:
-  apache_net:
-    driver: bridge
-    ipam:
-     config:
-       - subnet: ${APACHE_NET_SUBNET}.0/24
-  caddy_net:
-    driver: bridge
-    ipam:
-     config:
-       - subnet: ${CADDY_NET_SUBNET}.0/24
+      nginx_net:
+        aliases:
+          - "${DOMAIN_NAME}"

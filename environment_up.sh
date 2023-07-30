@@ -68,7 +68,7 @@ for arg in "$@"; do
 done
 
 # Launching containers and capturing output in log
-docker-compose --env-file Docker_configs/settings.env up -d 2>&1 | awk '{ print strftime("%Y-%m-%d %H:%M:%S"), $0; fflush(); }' | tee docker-compose.log
+docker-compose --env-file Docker_configs/settings.env up --force-recreate -d 2>&1 | awk '{ print strftime("%Y-%m-%d %H:%M:%S"), $0; fflush(); }' | tee docker-compose.log
 
 # If an error is logged, warn the user and error exit
 if [ ${PIPESTATUS[0]} -ne 0 ]; then

@@ -1,3 +1,6 @@
-10.10.10.1 - - [16/Jul/2023:20:36:10 +0000] "GET /favicon.ico HTTP/1.1" 404 555 "http://localhost:8080/http://domain.com" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" "-" "localhost" sn="" rt=0.000 ua="-" us="-" ut="-" ul="-" cs=-
-10.10.10.1 - - [16/Jul/2023:20:36:21 +0000] "GET /https://domain.com HTTP/1.1" 404 555 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" "-" "localhost" sn="" rt=0.000 ua="-" us="-" ut="-" ul="-" cs=-
-10.10.10.1 - - [16/Jul/2023:20:36:28 +0000] "GET /domain.com HTTP/1.1" 404 555 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" "-" "localhost" sn="" rt=0.000 ua="-" us="-" ut="-" ul="-" cs=-
+192.168.192.2 - - [30/Jul/2023:19:02:24 +0000] "HEAD / HTTP/1.1" 200 0 "-" "curl/7.88.1" "-"
+192.168.192.2 - - [30/Jul/2023:19:02:28 +0000] "HEAD /resource2 HTTP/1.1" 200 0 "-" "curl/7.88.1" "-"
+192.168.192.2 - - [30/Jul/2023:19:02:48 +0000] "GET /resource2 HTTP/1.1" 200 18677 "-" "curl/7.88.1" "-"
+10.10.10.1 - - [30/Jul/2023:19:03:02 +0000] "GET /favicon.ico HTTP/1.1" 404 555 "http://localhost:8080/domain.com" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" "-"
+10.10.10.1 - - [30/Jul/2023:19:03:07 +0000] "GET /domain.com HTTP/1.1" 404 555 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" "-"
+10.10.10.1 - - [30/Jul/2023:19:03:07 +0000] "GET /favicon.ico HTTP/1.1" 404 555 "http://localhost:8080/domain.com" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" "-"
